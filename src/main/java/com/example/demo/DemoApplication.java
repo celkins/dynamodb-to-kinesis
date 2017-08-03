@@ -25,9 +25,9 @@ public class DemoApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
     @Bean
     public <T> CommandLineRunner processorTask(Flux<T> source, Consumer<T> sink) {
@@ -44,15 +44,15 @@ public class DemoApplication {
                     String text = outcome.getString("Text");
                     return new Message(id, text);
                 });
-	}
+    }
 
     @Bean
     public Consumer<Message> sink(AmazonKinesis kinesisClient,
                                   ObjectMapper objectMapper,
                                   @Value("${kinesis.stream:${spring.application.name}}") String streamName) {
 
-	    return message -> {
-	        try {
+        return message -> {
+            try {
                 PutRecordRequest request = new PutRecordRequest();
                 request.setStreamName(streamName);
                 request.setPartitionKey(message.getId());
@@ -62,8 +62,8 @@ public class DemoApplication {
                 PutRecordResult result = kinesisClient.putRecord(request);
                 logger.info("Successfully wrote to Kinesis: {}", result);
             } catch (Exception e) {
-	            logger.error("Error writing to Kinesis", e);
-	            throw new RuntimeException(e);
+                logger.error("Error writing to Kinesis", e);
+                throw new RuntimeException(e);
             }
         };
     }
