@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	awsSdkVersion = '1.11.172'
+    springCloudTaskVersion = '1.2.1.RELEASE'
+	springCloudVersion = 'Dalston.SR2'
+}
+
+dependencies {
+    compile('com.amazonaws:aws-java-sdk-dynamodb')
+    compile('com.amazonaws:aws-java-sdk-kinesis')
+	compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.cloud:spring-cloud-starter-task')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.amazonaws:aws-java-sdk-bom:${awsSdkVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-task-dependencies:${springCloudTaskVersion}"
+	}
+}
