@@ -32,6 +32,7 @@ dependencies {
     compile('com.amazonaws:aws-java-sdk-dynamodb')
     compile('com.amazonaws:aws-java-sdk-kinesis')
     compile('io.projectreactor:reactor-core')
+    compile('org.springframework:spring-web')
 	compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.cloud:spring-cloud-starter-task')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
