@@ -23,6 +23,7 @@ repositories {
 
 ext {
 	awsSdkVersion = '1.11.172'
+    reactorVersion = 'Aluminium-SR1'
     springCloudTaskVersion = '1.2.1.RELEASE'
 	springCloudVersion = 'Dalston.SR2'
 }
@@ -30,6 +31,7 @@ ext {
 dependencies {
     compile('com.amazonaws:aws-java-sdk-dynamodb')
     compile('com.amazonaws:aws-java-sdk-kinesis')
+    compile('io.projectreactor:reactor-core')
 	compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.cloud:spring-cloud-starter-task')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -38,6 +40,7 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom "com.amazonaws:aws-java-sdk-bom:${awsSdkVersion}"
+		mavenBom "io.projectreactor:reactor-bom:${reactorVersion}"
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-task-dependencies:${springCloudTaskVersion}"
 	}
